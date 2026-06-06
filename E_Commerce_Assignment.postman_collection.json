@@ -444,7 +444,7 @@
         {
           "name": "PUT order to remove a single product from an order",
           "request": {
-            "method": "PUT",
+            "method": "DELETE",
             "header": [],
             "url": {
               "raw": "http://127.0.0.1:5000/orders/6/remove_product/6",
@@ -469,7 +469,7 @@
         {
           "name": "PUT order to remove multiple products from a single order",
           "request": {
-            "method": "PUT",
+            "method": "DELETE",
             "header": [],
             "body": {
               "mode": "raw",

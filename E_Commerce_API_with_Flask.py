@@ -4,7 +4,7 @@ from flask_marshmallow import Marshmallow
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
 from sqlalchemy import ForeignKey, Table, String, Column, select, DateTime
 from marshmallow import ValidationError, fields, validate
-from typing import List, Optional
+from typing import List
 from datetime import datetime
 import os
 
@@ -324,8 +324,8 @@ def add_multiple_products_to_order(order_id):
     db.session.commit()
     return order_schema.jsonify(order), 200
 
-# PUT an order to remove a single product from it
-@app.route("/orders/<int:order_id>/remove_product/<int:product_id>", methods=["PUT"])
+# DELETE a single product from a single order
+@app.route("/orders/<int:order_id>/remove_product/<int:product_id>", methods=["DELETE"])
 def remove_product_from_order(order_id, product_id):
     order = db.session.get(Order, order_id)
     if not order:
@@ -343,8 +343,8 @@ def remove_product_from_order(order_id, product_id):
 
     return order_schema.jsonify(order), 200
 
-# PUT an order to remove multiple products from it
-@app.route("/orders/<int:order_id>/remove_products", methods=["PUT"])
+# DELETE multiple products from a single order
+@app.route("/orders/<int:order_id>/remove_products", methods=["DELETE"])
 def remove_multiple_products_from_order(order_id):
     order = db.session.get(Order, order_id)
     if not order:
